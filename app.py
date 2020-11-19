@@ -5,7 +5,7 @@ import database
 import commands
 from model import Todo
 
-app = Flask(__name__, static_folder='./client/todo/build', static_url_path='/')
+app = Flask(__name__, static_folder='client/todo/build/', static_url_path='/')
 app.config.from_object(os.environ['APP_SETTINGS'])
 CORS(app)
 
