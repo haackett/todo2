@@ -7,7 +7,7 @@ from model import Todo
 
 app = Flask(__name__, static_folder='./client/todo/build', static_url_path='/')
 app.config.from_object(os.environ['APP_SETTINGS'])
-
+CORS(app)
 
 # setup dependencies
 database.init_app(app)
@@ -15,11 +15,8 @@ commands.init_app(app)
 
 @app.route("/")
 def main_page():
-    return render_template('index.html')
+    return send_from_directory(app.static_folder,'index.html')
 
-@app.errorhandler(404)
-def not_found(e):
-    return app.send_static_file('index.html')
 
 """
 API METHODS
