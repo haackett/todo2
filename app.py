@@ -1,11 +1,13 @@
 import os
 from flask import Flask, jsonify, render_template, request
+from flask_cors import CORS
 import database
 import commands
 from model import Todo
 
 app = Flask(__name__, static_folder='./client/todo/build', static_url_path='/')
 app.config.from_object(os.environ['APP_SETTINGS'])
+
 
 # setup dependencies
 database.init_app(app)
