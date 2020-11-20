@@ -8,6 +8,7 @@ class Todo(db.Model):
     text = db.Column(db.String, unique=False, nullable=False)
     completed = db.Column(db.Boolean, unique=False, nullable=False, default=False)
     initialDate = db.Column(db.DateTime, default=datetime.date.today())
+    recurrenceInterval = db.Column(db.Integer)
 
     @property
     def serialize(self):
