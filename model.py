@@ -1,4 +1,5 @@
 from database import db
+import datetime
 
 class Todo(db.Model):
     __tablename__ = 'todo'
@@ -6,6 +7,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, unique=False, nullable=False)
     completed = db.Column(db.Boolean, unique=False, nullable=False, default=False)
+    initialDate = db.Column(db.DateTime, default=datetime.date.today())
 
     @property
     def serialize(self):
