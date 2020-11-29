@@ -4,8 +4,6 @@ from flask_cors import CORS
 import database
 import commands
 from model import Todo
-from datefunctions import is_to_reccur
-from datetime import date
 
 app = Flask(__name__, static_folder='client/todo/build/', static_url_path='/')
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -63,18 +61,7 @@ def delete_todo(todo_id):
     response = "Deleted Todo: " + str(Todo.serialize_todo(todo))
     return response
 
-def set_todo_to_incomplete(todo_id):
-    todo = Todo.query.filter_by(id=todo_id).first()
-    todo.completed = False
-    database.db.session.commit()
     
-def set_recurring_todos_to_incomplete():
-    todosThatRecur = Todo.query.filter_by(reccurenceInterval != None)
-    for todo in todosThatRecur:
-        if is_to_reccur(todo.initialDate, timedate.date.today(), todo.reccurenceInterval):
-            set_todo_to_incomplete(todo.id)
-
-
 if __name__ == "__main__":
     app.run(port=os.environ.get('PORT', 80))
 
