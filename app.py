@@ -42,7 +42,7 @@ def add_todo():
     database.db.session.add(todo)
     database.db.session.commit()
     print("Commiting Todo: " + str(Todo.serialize_todo(todo)))
-    response = jsonify(Todo.serialize_todo(todo))
+    response = jsonify({'success' : True}, Todo.serialize_todo(todo))
     return response 
 
 @app.route('/todos/<int:todo_id>', methods=['PUT'])
@@ -52,7 +52,7 @@ def update_todo(todo_id):
     todo.completed = put_data.get("completed")
     todo.user = put_data.get("user")
     database.db.session.commit()
-    response = "Updated Todo: " + str(Todo.serialize_todo(todo))
+    response = jsonify({'success' : True}, Todo.serialize_todo(todo))
     return response
 
 @app.route('/todos/<int:todo_id>', methods=['DELETE'])
@@ -60,7 +60,7 @@ def delete_todo(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
     database.db.session.delete(todo)
     database.db.session.commit()
-    response = "Deleted Todo: " + str(Todo.serialize_todo(todo))
+    response = jsonify({'success' : True}, Todo.serialize_todo(todo))
     return response
 
     
