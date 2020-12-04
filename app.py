@@ -37,7 +37,8 @@ def get_todo(todo_id):
 def add_todo():
     post_data = request.get_json()
     text = post_data.get("text")
-    todo = Todo(text=text)
+    user = post_data.get("user")
+    todo = Todo(text=text, user=user)
     database.db.session.add(todo)
     database.db.session.commit()
     print("Commiting Todo: " + str(Todo.serialize_todo(todo)))
