@@ -49,6 +49,7 @@ def update_todo(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
     put_data = request.get_json()
     todo.completed = put_data.get("completed")
+    todo.user = put_data.get("user")
     database.db.session.commit()
     response = "Updated Todo: " + str(Todo.serialize_todo(todo))
     return response
