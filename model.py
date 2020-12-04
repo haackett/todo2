@@ -6,6 +6,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, unique=False, nullable=False)
     completed = db.Column(db.Boolean, unique=False, nullable=False, default=False)
+    user = db.Column(db.String, unique=False, nullable=False, default='')
 
     @property
     def serialize(self):
@@ -19,4 +20,5 @@ class Todo(db.Model):
             'id': todo.id,
             'text' : todo.text,
             'completed' : todo.completed,
+            'user' : todo.user
         }
