@@ -39,6 +39,7 @@ function App() {
  
   return (
     <div className="App">
+      <header> todo list </header>
       <Form 
         inputText={inputText} 
         todos={todos} 
