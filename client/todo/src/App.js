@@ -4,7 +4,13 @@ import React, { useState, useEffect, Component } from 'react';
 import Form from './components/Form';
 import TodoList from './components/TodoList';
 
+//Import Hooks
+import useInterval from './hooks/useInterval';
+
 function App() {
+  //GLOBALS
+  const TODOS_REFRESH_INTERVAL = 1000;
+
   //State
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
@@ -13,13 +19,16 @@ function App() {
    
   //USE EFFECT
   useEffect(() => {
+    filterHandler();
+  }, [todos, status]);
+
+   //we are going to just update with a polling system for now
+  useInterval(async () => {
     fetch("/todos/")
       .then(response => response.json())
       .then(data => setTodos(data))
       .catch(error => console.log(error));
-      
-    filterHandler();
-  }, [todos, status]);
+  }, TODOS_REFRESH_INTERVAL);
 
   //Functions
   const filterHandler = () => {

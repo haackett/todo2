@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Form = ({ inputText, setInputText, todos, setTodos, setStatus}) => {
-    //State
-    const [startDate, setStartDate] = useState(new Date());
     
     //Events
     const inputTextHandler = (e) => {
@@ -18,7 +16,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus}) => {
         */
         const postData = {
             method: "POST",
-            body: JSON.stringify({ text: inputText }),
+            body: JSON.stringify({ text: inputText, requesting_user : 'Website' }),
             headers: {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
