@@ -9,6 +9,8 @@ app = Flask(__name__, static_folder='client/todo/build/', static_url_path='/')
 app.config.from_object(os.environ['APP_SETTINGS'])
 CORS(app)
 
+ADMIN = '<@149333543191838720>'
+
 # setup dependencies
 database.init_app(app)
 commands.init_app(app)
@@ -37,8 +39,9 @@ def get_todo(todo_id):
 def add_todo():
     post_data = request.get_json()
     text = post_data.get("text")
-    user = post_data.get("user")
-    todo = Todo(text=text, user=user)
+    requesting_user = post_data.get("requesting_user")
+    dependent_users = post_data.get("dependent_users")
+    todo = Todo(text=text, requesting_user=requesting_user, dependent_users=dependent_users)
     database.db.session.add(todo)
     database.db.session.commit()
     print("Commiting Todo: " + str(Todo.serialize_todo(todo)))
