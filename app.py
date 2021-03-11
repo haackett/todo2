@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import database
 import commands
@@ -52,7 +52,10 @@ def add_todo():
 def update_todo(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
     put_data = request.get_json()
-    todo.completed = put_data.get("completed")
+    if put_data.get("completed") != None:
+        todo.completed = put_data.get("completed")
+    if put_data.get("text") != None:
+        todo.complete = put_data.get("text")
     database.db.session.commit()
     response = jsonify({'success' : True}, Todo.serialize_todo(todo))
     return response

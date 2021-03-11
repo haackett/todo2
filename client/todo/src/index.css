@@ -9,7 +9,6 @@ body {
   color: white;
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
-  background-image: url("background.png");
 }
 
 code {
@@ -83,7 +82,7 @@ form button:hover {
   font-size: 1rem;
 }
 .complete-btn {
-  background: rgb(11, 212, 162);
+  background: #0bd4a2;
 }
 .todo-item {
   padding: 0rem 0.5rem;
